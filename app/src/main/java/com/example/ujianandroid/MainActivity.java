@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<String> daftar_nama = new ArrayList<>();
 
         Intent intent_list = new Intent(MainActivity.this, ListActivity.class);
-
         btnSimpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -36,19 +35,25 @@ public class MainActivity extends AppCompatActivity {
 
                 if(isian_nama_depan.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Isian masih kosong", Toast.LENGTH_SHORT).show();
-                }else if (isian_umur.isEmpty()){
+                } else if (isian_umur.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Umur belum diisi", Toast.LENGTH_SHORT).show();
-                }else{
-                    int jumlah_umur = interger.parseInt(isian_umur);
+                } else {
+                    int jumlah_umur = Integer.parseInt(isian_umur);
                     String nama_lengkap = isian_nama_depan.concat(" ").concat(isian_nama_belakang);
                     daftar_nama.clear();
 
                     for (int i = 0; i < jumlah_umur; i++) {
                         daftar_nama.add(nama_lengkap);
                     }
+
                     edNamaDepan.setText("");
                     edNamaBelakang.setText("");
                     intent_list.putStringArrayListExtra("daftar_nama", daftar_nama);
+
+                    for (String nama : daftar_nama) {
+                        System.out.println(nama);
+                    }
+
                     startActivity(intent_list);
                 }
             }
